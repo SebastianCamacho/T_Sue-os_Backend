@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace ENTITY
 {
@@ -12,10 +13,10 @@ namespace ENTITY
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public required int idPedido { get; set; }
-        public required int cantidad { get; set; }
-
-        public required List<Talla> listaTallas { get; set; } = new List<Talla>();
+        public int idPedido { get; set; }
+        public int cantidad { get; set; }
+        [JsonIgnore]
+        public List<Talla> listaTallas { get; set; } = new List<Talla>();
 
         public int idFactura { get; set; }
         //propiedad de navegacion
@@ -25,6 +26,6 @@ namespace ENTITY
         public int idProducto { get; set; }
         //propiedad de navegacion
         [ForeignKey("idProducto")]
-        public required Producto Producto { get; set; }
+        public Producto Producto { get; set; }
     }
 }

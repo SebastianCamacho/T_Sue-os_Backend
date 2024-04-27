@@ -12,13 +12,18 @@ namespace ENTITY
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public required int idTalla { get; set; }
-        public required string descripcion { get; set; }
-        public required double medida { get; set; }
+        public int idTalla { get; set; }
+        public string descripcion { get; set; }
+        public double medida { get; set; }
 
         public int idPedido { get; set; }
         //propiedad de navegacion
         [ForeignKey("idPedido")]
         public Pedido Pedido { get; set; }
+
+        public Talla()
+        {
+            
+        }
     }
 }

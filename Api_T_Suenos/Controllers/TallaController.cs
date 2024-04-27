@@ -1,5 +1,7 @@
 ﻿using ENTITY;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,13 +21,13 @@ namespace Api_T_Suenos.Controllers
 
         // GET: api/<TallaController>
         [HttpGet]
-        [Route("listaTallas")]
+        [Route("Listar")]
         public IActionResult listarTallasAll()
         {
             List<Talla> lista=new List<Talla>();
             try
             {
-                lista=_dbContext.Tallas.ToList();
+                lista=_dbContext.Tallas.Include(p => p.Pedido).ToList();
                 return StatusCode(StatusCodes.Status200OK, new {mensaje="ok", response=lista});
             }catch (Exception ex)
             {
@@ -36,16 +38,46 @@ namespace Api_T_Suenos.Controllers
         }
 
         // GET api/<TallaController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("id:{id}")]
+        public IActionResult Get(int id)
         {
-            return "value";
+            Talla talla = _dbContext.Tallas.Find(id);
+
+            if (talla == null)
+            {
+                return BadRequest("Producto No encontrado");
+            }
+            try
+            {
+                talla = _dbContext.Tallas.Include(t => t.Pedido.Producto)
+                    .Where(p=>p.idTalla==id).FirstOrDefault();
+
+
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "ok", response = talla });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status404NotFound, new { mensaje = ex.Message, response = talla });
+
+            }
         }
 
         // POST api/<TallaController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("Guardar")]
+        public IActionResult Post([FromBody] Talla objeto)
         {
+            try
+            {
+                _dbContext.Tallas.Add(objeto);
+                _dbContext.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created, new { mensaje = "Guardado correctamente" });
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status404NotFound, new { mensaje = ex.Message });
+
+            }
         }
 
         // PUT api/<TallaController>/5

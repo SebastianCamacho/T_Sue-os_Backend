@@ -1,5 +1,6 @@
 using ENTITY;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,10 @@ var conecctionString = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContext<T_Suenos_Context>(options =>
     options.UseSqlServer(conecctionString)
 );
+
+builder.Services.AddControllers().AddJsonOptions(opt =>
+    opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); 
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace ENTITY
 {
@@ -12,13 +13,14 @@ namespace ENTITY
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public required int idProducto { get; set; }
-        public required string nombre { get; set; }
-        public required string categoria { get; set; }
-        public required double precio { get; set; }
-        public required string colorPrincipal { get; set; }
-        public required string colorSecundario { get; set; }
-        public required string colorTerciario { get; set; }
-        public required List<Pedido> listaPedidos { get; set; }
+        public  int idProducto { get; set; }
+        public  string nombre { get; set; }
+        public  string categoria { get; set; }
+        public  double precio { get; set; }
+        public  string colorPrincipal { get; set; }
+        public  string colorSecundario { get; set; }
+        public  string colorTerciario { get; set; }
+        [JsonIgnore]
+        public  List<Pedido> listaPedidos { get; set; }
     }
 }
