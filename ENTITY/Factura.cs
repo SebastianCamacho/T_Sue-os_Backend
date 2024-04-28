@@ -23,7 +23,7 @@ namespace ENTITY
         public string nombreUsuario { get; set; }
         //propiedad de navegacion
         [ForeignKey("nombreUsuario")]
-        public Cliente Cliente { get; set; }
+        public Cliente? Cliente { get; set; }
 
         public required List<Pedido> listaPedidos { get; set; }
 
@@ -31,7 +31,7 @@ namespace ENTITY
 
         public Factura()
         {
-            this.nombreUsuario = "";
+            
         }
 
 

@@ -22,5 +22,12 @@ namespace ENTITY
         public  string colorTerciario { get; set; }
         [JsonIgnore]
         public  List<Pedido> listaPedidos { get; set; }
+
+
+
+        public Producto()
+        {
+            
+        }
     }
 }

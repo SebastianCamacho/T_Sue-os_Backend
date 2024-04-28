@@ -29,8 +29,7 @@ namespace ENTITY
 
         public Cliente()
         {
-            segundoNombre = "";
-            listaFacturas = new List<Factura>();
+            
         }
     }
 }

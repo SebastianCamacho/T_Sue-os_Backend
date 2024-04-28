@@ -1,7 +1,10 @@
 ﻿using ENTITY;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Text.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,7 +41,7 @@ namespace Api_T_Suenos.Controllers
         }
 
         // GET api/<TallaController>/5
-        [HttpGet("id:{id}")]
+        [HttpGet("ListarId:{id}")]
         public IActionResult Get(int id)
         {
             Talla talla = _dbContext.Tallas.Find(id);
@@ -81,15 +84,62 @@ namespace Api_T_Suenos.Controllers
         }
 
         // PUT api/<TallaController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("Edit:{id}")]
+        public IActionResult Put(int id, [FromBody] Talla objeto)
         {
+
+            Talla talla = _dbContext.Tallas.Find(id);
+
+            if (talla == null)
+            {
+                return BadRequest("Producto No encontrado");
+            }
+
+            try{
+                talla.descripcion = objeto.descripcion is null ? talla.descripcion : objeto.descripcion;
+                talla.medida = objeto.medida is null ? talla.medida : objeto.medida;
+                talla.idPedido = objeto.idPedido is null ? talla.idPedido : objeto.idPedido;
+
+
+                _dbContext.Tallas.Update(talla);
+                _dbContext.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created, new { mensaje = "Actualizado correctamente" });
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status404NotFound, new { mensaje = ex.Message });
+
+            }
+
+
+
         }
 
         // DELETE api/<TallaController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("Eliminar:{id}")]
+        public IActionResult Delete(int id)
         {
+
+
+            Talla talla = _dbContext.Tallas.Find(id);
+
+            if (talla == null)
+            {
+                return BadRequest("Producto No encontrado");
+            }
+
+            try
+            {
+
+                _dbContext.Tallas.Remove(talla);
+                _dbContext.SaveChanges();
+                return StatusCode(StatusCodes.Status201Created, new { mensaje = "Eliminado Correctamente" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status404NotFound, new { mensaje = ex.Message });
+
+            }
         }
     }
 }
