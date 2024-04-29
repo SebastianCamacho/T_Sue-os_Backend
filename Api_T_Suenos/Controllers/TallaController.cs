@@ -4,12 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Text.Json;
+using Microsoft.AspNetCore.Cors;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Api_T_Suenos.Controllers
 {
+    [EnableCors("ReglasCors")]
     [Route("api/[controller]")]
     [ApiController]
     public class TallaController : ControllerBase
@@ -25,7 +27,7 @@ namespace Api_T_Suenos.Controllers
         // GET: api/<TallaController>
         [HttpGet]
         [Route("Listar")]
-        public IActionResult listarTallasAll()
+        public IActionResult Get()
         {
             List<Talla> lista=new List<Talla>();
             try
@@ -48,7 +50,7 @@ namespace Api_T_Suenos.Controllers
 
             if (talla == null)
             {
-                return BadRequest("Producto No encontrado");
+                return BadRequest("Talla No encontrada");
             }
             try
             {
@@ -74,7 +76,7 @@ namespace Api_T_Suenos.Controllers
             {
                 _dbContext.Tallas.Add(objeto);
                 _dbContext.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, new { mensaje = "Guardado correctamente" });
+                return StatusCode(StatusCodes.Status201Created, new { mensaje = "Talla guardada correctamente" });
             }
             catch(Exception ex)
             {
@@ -103,16 +105,13 @@ namespace Api_T_Suenos.Controllers
 
                 _dbContext.Tallas.Update(talla);
                 _dbContext.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, new { mensaje = "Actualizado correctamente" });
+                return StatusCode(StatusCodes.Status201Created, new { mensaje = "Talla actualizada correctamente" });
             }
             catch(Exception ex)
             {
                 return StatusCode(StatusCodes.Status404NotFound, new { mensaje = ex.Message });
 
             }
-
-
-
         }
 
         // DELETE api/<TallaController>/5
@@ -133,7 +132,7 @@ namespace Api_T_Suenos.Controllers
 
                 _dbContext.Tallas.Remove(talla);
                 _dbContext.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, new { mensaje = "Eliminado Correctamente" });
+                return StatusCode(StatusCodes.Status201Created, new { mensaje = "Talla eliminada Correctamente" });
             }
             catch (Exception ex)
             {

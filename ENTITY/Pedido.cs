@@ -20,11 +20,13 @@ namespace ENTITY
 
         public int idFactura { get; set; }
         //propiedad de navegacion
+        [JsonIgnore]
         [ForeignKey("idFactura")]
         public Factura? Factura { get; set; }
 
         public int idProducto { get; set; }
         //propiedad de navegacion
+        [JsonIgnore]
         [ForeignKey("idProducto")]
         public Producto? Producto { get; set; }
 

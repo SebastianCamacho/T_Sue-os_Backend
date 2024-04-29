@@ -11,19 +11,19 @@ namespace ENTITY
     {
         [Key]
         [MaxLength(50)]
-        public required string nombreUsuario { get; set; }
+        public string nombreUsuario { get; set; }
         [MaxLength(50)]
-        public required string primerNombre { get; set; }
+        public string primerNombre { get; set; }
         [MaxLength(50)]
         public string segundoNombre { get; set; }
         [MaxLength(50)]
-        public required string primerApellido { get; set; }
+        public string primerApellido { get; set; }
         [MaxLength(50)]
-        public required string segundoApellido { get; set; }
+        public string segundoApellido { get; set; }
         public long Celular { get; set; }
-        public required string direccionResidencia { get; set; }
-        public required string ciudadResidencia { get; set; }
-        public required string paisResidencia { get; set; }
+        public string direccionResidencia { get; set; }
+        public string ciudadResidencia { get; set; }
+        public string paisResidencia { get; set; }
         public List<Factura> listaFacturas { get; set; }
 
 

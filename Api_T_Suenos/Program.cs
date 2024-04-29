@@ -12,6 +12,16 @@ builder.Services.AddDbContext<T_Suenos_Context>(options =>
     options.UseSqlServer(conecctionString)
 );
 
+var misReglasCors = "ReglasCors";
+
+builder.Services.AddCors(opt =>
+opt.AddPolicy(name: misReglasCors, builder =>
+{
+    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+})
+);
+
+
 builder.Services.AddControllers().AddJsonOptions(opt =>
     opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); 
 
@@ -29,6 +39,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(misReglasCors);
 
 app.UseHttpsRedirection();
 

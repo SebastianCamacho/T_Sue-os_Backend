@@ -14,14 +14,13 @@ namespace ENTITY
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public  int idProducto { get; set; }
-        public  string nombre { get; set; }
-        public  string categoria { get; set; }
-        public  double precio { get; set; }
-        public  string colorPrincipal { get; set; }
-        public  string colorSecundario { get; set; }
-        public  string colorTerciario { get; set; }
-        [JsonIgnore]
-        public  List<Pedido> listaPedidos { get; set; }
+        public  string? nombre { get; set; }
+        public  string? categoria { get; set; }
+        public  double? precio { get; set; }
+        public  string? colorPrincipal { get; set; }
+        public  string? colorSecundario { get; set; }
+        public  string? colorTerciario { get; set; }
+        public  List<Pedido>? listaPedidos { get; set; }
 
 
 
