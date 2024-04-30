@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace ENTITY
 {
@@ -12,20 +13,21 @@ namespace ENTITY
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public required int idFactura { get; set; }
-        public required DateTime fecha { get; set; }
-        public required string tipoDePago { get; set; }
-        public required string direcionDeEntrega { get; set; }
-        public required string ciudadDeEntrega { get; set; }
-        public required string paisDeEntrega { get; set; }
-        public required string tipoEnvio { get; set; }
+        public int idFactura { get; set; }
+        public DateTime? fecha { get; set; }
+        public string? tipoDePago { get; set; }
+        public string? direcionDeEntrega { get; set; }
+        public string? ciudadDeEntrega { get; set; }
+        public string? paisDeEntrega { get; set; }
+        public string? tipoEnvio { get; set; }
 
-        public string nombreUsuario { get; set; }
+        public string? nombreUsuario { get; set; }
         //propiedad de navegacion
+        [JsonIgnore]
         [ForeignKey("nombreUsuario")]
         public Cliente? Cliente { get; set; }
 
-        public required List<Pedido> listaPedidos { get; set; }
+        public List<Pedido>? listaPedidos { get; set; }
 
 
 

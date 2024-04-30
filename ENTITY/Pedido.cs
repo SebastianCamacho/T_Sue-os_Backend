@@ -14,17 +14,19 @@ namespace ENTITY
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idPedido { get; set; }
-        public int cantidad { get; set; }
+        public int? cantidad { get; set; }
+        public int? idFactura { get; set; }
+        public int? idProducto { get; set; }
         [JsonIgnore]
-        public List<Talla> listaTallas { get; set; } = new List<Talla>();
+        public List<Talla>? listaTallas { get; set; } = new List<Talla>();
 
-        public int idFactura { get; set; }
+        
         //propiedad de navegacion
         [JsonIgnore]
         [ForeignKey("idFactura")]
         public Factura? Factura { get; set; }
 
-        public int idProducto { get; set; }
+
         //propiedad de navegacion
         [JsonIgnore]
         [ForeignKey("idProducto")]

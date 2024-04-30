@@ -94,7 +94,7 @@ namespace Api_T_Suenos.Controllers
 
             if (talla == null)
             {
-                return BadRequest("Producto No encontrado");
+                return BadRequest("Talla No encontrado");
             }
 
             try{
@@ -124,7 +124,7 @@ namespace Api_T_Suenos.Controllers
 
             if (talla == null)
             {
-                return BadRequest("Producto No encontrado");
+                return BadRequest("Talla No encontrado");
             }
 
             try

@@ -4,6 +4,7 @@ using ENTITY;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ENTITY.Migrations
 {
     [DbContext(typeof(T_Suenos_Context))]
-    partial class T_Suenos_ContextModelSnapshot : ModelSnapshot
+    [Migration("20240429160142_Fourth")]
+    partial class Fourth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,7 +61,7 @@ namespace ENTITY.Migrations
 
                     b.HasKey("nombreUsuario");
 
-                    b.ToTable("Clientes", (string)null);
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("ENTITY.Factura", b =>
@@ -94,7 +97,7 @@ namespace ENTITY.Migrations
 
                     b.HasIndex("nombreUsuario");
 
-                    b.ToTable("Facturas", (string)null);
+                    b.ToTable("Facturas");
                 });
 
             modelBuilder.Entity("ENTITY.Pedido", b =>
@@ -120,7 +123,7 @@ namespace ENTITY.Migrations
 
                     b.HasIndex("idProducto");
 
-                    b.ToTable("Pedidos", (string)null);
+                    b.ToTable("Pedidos");
                 });
 
             modelBuilder.Entity("ENTITY.Producto", b =>
@@ -151,7 +154,7 @@ namespace ENTITY.Migrations
 
                     b.HasKey("idProducto");
 
-                    b.ToTable("Productos", (string)null);
+                    b.ToTable("Productos");
                 });
 
             modelBuilder.Entity("ENTITY.Talla", b =>
@@ -175,7 +178,7 @@ namespace ENTITY.Migrations
 
                     b.HasIndex("idPedido");
 
-                    b.ToTable("Tallas", (string)null);
+                    b.ToTable("Tallas");
                 });
 
             modelBuilder.Entity("ENTITY.Factura", b =>
